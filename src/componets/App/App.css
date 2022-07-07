@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+
+
+body {
+    background: #F7F7F7;
+    font-family: 'Inter', serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 28px;;
+}
+
+.App {
+    width: 100%;
+    max-width: 1010px;
+    background: #FFF;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 35px;
+}
+
+.ant-tabs-nav {
+    padding: 13px 0;
+}
+
+.ant-list-pagination {
+    text-align: center;
+}
