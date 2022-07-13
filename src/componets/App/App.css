@@ -29,3 +29,7 @@ body {
 .ant-list-pagination {
     text-align: center;
 }
+
+.ant-list-empty-text {
+    display: none;
+}

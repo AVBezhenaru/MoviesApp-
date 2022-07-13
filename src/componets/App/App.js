@@ -14,34 +14,28 @@ const onChange = (key) => {
 export default class App extends Component {
   movieService = new MovieService();
 
-  state = {
-    movies: [],
-  };
+  // state = {
+  //   movies: [],
+  //   loading: true,
+  // };
 
-  textReduction = (text) => {
-    let result = text.split('');
-
-    for (let i = 0; i < result.length; i++) {
-      if (i >= 200 && result[i] === ' ') {
-        return `${result.splice(0, i).join('')}...`;
-      }
-    }
-  };
-  componentDidMount() {
-    this.movieService.getResource().then(({ results }) => {
-      console.log(results);
-      this.setState({ movies: results });
-    });
-  }
+  // componentDidMount() {
+  //   this.movieService.getResource().then(({ results }) => {
+  //     this.setState({ movies: results, loading: false });
+  //   });
+  // }
 
   render() {
+    console.log('render app');
     return (
       <div className="App">
         <Tabs defaultActiveKey="Search" centered={true} onChange={onChange}>
           <TabPane tab="Search" key="Search">
-            <MovieList results={this.state.movies} textReduction={this.textReduction} />
+            <MovieList />
           </TabPane>
-          <TabPane tab="Rated" key="Rated"></TabPane>
+          <TabPane tab="Rated" key="Rated">
+            sfd
+          </TabPane>
         </Tabs>
       </div>
     );

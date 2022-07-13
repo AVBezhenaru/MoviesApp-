@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const MovieSearch = () => {
-  return (
-    <form action="">
-      <input type="Type to search" />
-    </form>
-  );
-};
+import MovieService from '../../services/MovieService';
 
-export default MovieSearch;
+export default class MovieSearch extends Component {
+  movieService = new MovieService();
+
+  render() {
+    return (
+      <form action="">
+        <input type="Type to search" />
+      </form>
+    );
+  }
+}

@@ -17,6 +17,10 @@
     grid-area: img;
 }
 
+.movie__img img {
+    width: 100%;
+}
+
 
 .movie__header {
     grid-area: header;
