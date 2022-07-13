@@ -17,6 +17,7 @@ const Movie = ({ img, title, date, genre, overview, rating }) => {
     }
   };
   const redactOverviewText = textReduction(overview);
+  console.log(1);
 
   return (
     <div className="movie">
@@ -25,7 +26,7 @@ const Movie = ({ img, title, date, genre, overview, rating }) => {
       </div>
       <div className="movie__header">
         <div className="movie__top">
-          <div className="movie__title">{title1}</div>
+          <div className="movie__title">{title}</div>
           <div className="movie__average">{rating}</div>
         </div>
 

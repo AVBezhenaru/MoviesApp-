@@ -27,6 +27,7 @@ export default class App extends Component {
 
   render() {
     console.log('render app');
+
     return (
       <div className="App">
         <Tabs defaultActiveKey="Search" centered={true} onChange={onChange}>

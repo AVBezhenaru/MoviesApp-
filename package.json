@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
-    "lint-fix": "eslint ./src --fix",
+    "lint-fix": "eslint ./src --fix --color",
     "format": "prettier --write ./src"
   },
   "eslintConfig": {
