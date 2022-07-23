@@ -62,9 +62,7 @@ export default class Movie extends Component {
               </ul>
             </div>
             <div className="movie__info">
-              <div className="movie__overview">
-                {!this.redactOverviewText ? 'No description' : this.textReduction(overview)}
-              </div>
+              <div className="movie__overview">{!overview ? 'No description' : this.textReduction(overview)}</div>
               <div className="movie__rating">
                 <Rate
                   allowHalf={true}
