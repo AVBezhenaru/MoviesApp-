@@ -62,6 +62,33 @@
     border: 2px solid rgba(233, 209, 0, 1);
 }
 
+.movie__date {
+    font-size: 12px;
+    line-height: 22px;
+    color: #827E7E;
+    margin-bottom: 8px;
+}
+
+.movie__genre {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0px;
+}
+
+.movie__genre_item {
+    background: #FAFAFA;
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+    padding: 2px 5px;
+    width: auto;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+}
+
 
 
 @media screen and (max-width: 550px){

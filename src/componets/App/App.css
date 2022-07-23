@@ -19,7 +19,7 @@ body {
     background: #FFF;
     margin: 0 auto;
     min-height: 100vh;
-    padding: 35px;
+    padding: 0 35px;
 }
 
 .ant-tabs-nav {

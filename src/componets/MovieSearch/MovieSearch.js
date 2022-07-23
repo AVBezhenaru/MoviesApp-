@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
-import MovieService from '../../services/MovieService';
-
 export default class MovieSearch extends Component {
-  movieService = new MovieService();
-
   render() {
     return (
-      <form action="">
-        <input type="Type to search" />
-      </form>
+      <input
+        type="search"
+        placeholder="Type to search..."
+        onChange={this.props.handleSearchKeyPress}
+        className="moviesSearch"
+      />
     );
   }
 }
