@@ -23,9 +23,9 @@ export default class MovieService {
     return this.getResource(`${this._apiBase}search/movie?query=${query}&page=${pageNumber}&api_key=${this._apiKey}`);
   }
 
-  async getRatedMovies(guestSession) {
+  async getRatedMovies(guestSession, page) {
     return this.getResource(
-      `${this._apiBase}guest_session/${guestSession}/rated/movies?api_key=${this._apiKey}&sort_by=created_at.asc`
+      `${this._apiBase}guest_session/${guestSession}/rated/movies?api_key=${this._apiKey}&sort_by=created_at.asc&page=${page}`
     );
   }
 

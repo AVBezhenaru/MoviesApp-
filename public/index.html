@@ -12,6 +12,10 @@
   </head>
   <body>
     <div id="root"></div>
-
+    <script !src=''>
+      window.addEventListener('unload', () => {
+        sessionStorage.clear();
+      });
+    </script>
   </body>
 </html>

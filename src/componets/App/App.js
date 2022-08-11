@@ -22,6 +22,7 @@ export default class App extends Component {
     alertMessage: '',
     query: '',
     pageNumber: 1,
+    pageRatedNumber: 1,
     totalResults: 0,
     totalRatedResults: 0,
     guestSession: null,
@@ -30,7 +31,7 @@ export default class App extends Component {
   updateMovies = () => {
     this.setState({ loading: true, error: false });
     if (this.state.query === '') {
-      this.setState({ searchMovies: [], loading: false, totalResults: 0 });
+      this.setState({ searchMovies: [], loading: false, totalResults: 0, pageNumber: 1 });
       return;
     }
     this.movieService
@@ -39,12 +40,13 @@ export default class App extends Component {
         if (total_results === 0) {
           this.setState({ alertMessage: 'Oops, Your request did not result', error: true });
         }
+
         this.setState({ searchMovies: results, loading: false, totalResults: total_results });
       })
       .catch(this.onError);
   };
 
-  debounceUpdateMovies = debounce(this.updateMovies, 200);
+  debounceUpdateMovies = debounce(this.updateMovies, 300);
 
   handleSearchKeyPress = (event) => {
     this.setState({ query: event.target.value });
@@ -62,9 +64,13 @@ export default class App extends Component {
   onChangePage = (page) => {
     this.setState({ pageNumber: page });
   };
+  onRatedChangePage = (page) => {
+    this.getRateMovie(page);
+  };
 
   sendRateMovie = (rate, id) => {
-    this.movieService.sendRateMovie(id, rate, this.state.guestSession).then(this.getRateMovie);
+    sessionStorage.setItem(id.toString(), rate);
+    this.movieService.sendRateMovie(id, rate, this.state.guestSession);
     const newArr = this.state.searchMovies;
     newArr.map((item) => {
       if (item.id === id) {
@@ -74,8 +80,8 @@ export default class App extends Component {
     this.setState({ searchMovies: newArr });
   };
 
-  getRateMovie = () => {
-    this.movieService.getRatedMovies(this.state.guestSession).then((res) => {
+  getRateMovie = (page = this.state.pageRatedNumber) => {
+    this.movieService.getRatedMovies(this.state.guestSession, page).then((res) => {
       this.setState(() => {
         return { ratedMovies: res.results, totalRatedResults: res.total_results };
       });
@@ -90,6 +96,9 @@ export default class App extends Component {
     if (prevState.searchMovies !== this.state.searchMovies) {
       this.setState(this.state);
     }
+    if (prevState.ratedMovies !== this.state.ratedMovies) {
+      this.setState(this.state);
+    }
   }
 
   componentDidMount() {
@@ -99,30 +108,39 @@ export default class App extends Component {
     this.movieService.getGenres().then((res) => this.setState({ genres: res.genres }));
   }
 
+  onChange = (key) => {
+    if (key === 'Rated') {
+      this.getRateMovie();
+    }
+    if (key === 'Search') {
+      this.updateMovies();
+    }
+  };
+
   render() {
     const { searchMovies, ratedMovies, totalResults, totalRatedResults, genres, ...props } = this.state;
 
     return (
       <GenreProvider value={genres}>
         <div className="App">
-          <Tabs defaultActiveKey="Search" centered={true}>
+          <Tabs defaultActiveKey="Search" centered={true} onChange={this.onChange}>
             <TabPane tab="Search" key="Search">
               <MovieSearch handleSearchKeyPress={this.handleSearchKeyPress} />
               <MovieList
                 {...props}
-                totalResults={totalResults}
                 movies={searchMovies}
+                totalResults={totalResults}
                 sendRateMovie={this.sendRateMovie}
                 onChangePage={this.onChangePage}
               />
             </TabPane>
             <TabPane tab="Rated" key="Rated">
               <MovieList
+                {...props}
                 movies={ratedMovies}
                 totalResults={totalRatedResults}
                 sendRateMovie={this.sendRateMovie}
-                onChangePage={this.onChangePage}
-                {...props}
+                onChangePage={this.onRatedChangePage}
               />
             </TabPane>
           </Tabs>

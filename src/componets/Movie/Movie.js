@@ -13,7 +13,7 @@ export default class Movie extends Component {
     let result = text.split('');
 
     for (let i = 0; i < result.length; i++) {
-      if (i >= 200 && result[i] === ' ') {
+      if (i >= 160 && result[i] === ' ') {
         return `${result.splice(0, i).join('')}...`;
       }
     }
@@ -35,7 +35,8 @@ export default class Movie extends Component {
   };
 
   render() {
-    const { img, title, date, genreId, overview, voteAverage, sendRateMovie, movieId, rating } = this.props;
+    const { img, title, date, genreId, overview, voteAverage, sendRateMovie, movieId } = this.props;
+    const rateValue = sessionStorage.getItem(movieId.toString());
 
     return (
       <GenreConsumer>
@@ -62,12 +63,12 @@ export default class Movie extends Component {
               </ul>
             </div>
             <div className="movie__info">
-              <div className="movie__overview">{!overview ? 'No description' : this.textReduction(overview)}</div>
+              <div className="movie__overview">{overview ? this.textReduction(overview) : 'No description'`1`}</div>
               <div className="movie__rating">
                 <Rate
-                  allowHalf={true}
-                  defaultValue={!rating ? 0 : rating}
-                  value={!rating ? 0 : rating}
+                  allowHalf={false}
+                  defaultValue={rateValue}
+                  value={rateValue}
                   count={10}
                   style={{ fontSize: 16 }}
                   onChange={(value) => {
